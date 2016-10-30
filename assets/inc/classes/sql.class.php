@@ -34,7 +34,7 @@ class PDODatabase
 
 
 	// Constructor
-	function __construct($dbType, $dbHost, $dbName, $dbUser, $dbPassword)
+	public function __construct($dbType, $dbHost, $dbName, $dbUser, $dbPassword)
 	{
 		$this->dbType = $dbType;
 		$this->dbHost = $dbHost;
@@ -45,7 +45,7 @@ class PDODatabase
 
 
 	// Initialize PDO Object
-	function initializePDOObject()
+	public function initializePDOObject()
 	{
 		try{
 			$connection = new PDO($this->dbType.':host='.$this->dbHost.';dbname='.$this->dbName, $this->dbUser, $this->dbPassword);
@@ -57,7 +57,7 @@ class PDODatabase
 	}
 
 	// Query from PDO db
-	function query(PDO $connection, $sql, $bindings)
+	public function query(PDO $connection, $sql, $bindings)
 	{
 		$stmt = $connection->prepare($sql);
 		$stmt->execute($bindings);
@@ -68,7 +68,7 @@ class PDODatabase
 	}
 
 	// Find All from one table
-	function findAll(PDO $connection, $table)
+	public function findAll(PDO $connection, $table)
 	{
 		try{
 			$results = $connection->query('SELECT * FROM '.$table);
