@@ -1,0 +1,17 @@
+<?php
+
+$title = "Title";
+
+require 'assets/inc/bootstrap.php';
+include 'inc/head.php';
+include 'inc/header.php';
+
+?>
+
+<div id="container">
+    <div id="main" class="">
+        <h2>Hello World</h2>
+    </div>
+</div>
+
+<?php include 'inc/footer.php'; ?>
