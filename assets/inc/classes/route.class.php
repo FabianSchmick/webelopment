@@ -73,6 +73,8 @@ class Route
                  * Pass an array for arguments
                  */
                 call_user_func_array($this->_listCall[$listKey], $replacementValues);
+            } else {    // If no route was found
+                include_once 'pages/frontend/errors/404.html';
             }
 
         }
