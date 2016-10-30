@@ -1,17 +1,13 @@
 <?php
 
-$title = "Title";
+require 'assets/inc/classes/route.class.php';
 
-require 'assets/inc/bootstrap.php';
-include 'assets/inc/head.php';
-include 'assets/inc/header.php';
+use \assets\inc\classes\Route;
 
-?>
+$route = new Route();
 
-<div id="container">
-	<div id="main" class="">
-		<h2>Hello World</h2>
-	</div>
-</div>
+$route->add('/', function() {
+	require_once 'pages/frontend/index.php';
+});
 
-<?php include 'assets/inc/footer.php'; ?>
+$route->submit();

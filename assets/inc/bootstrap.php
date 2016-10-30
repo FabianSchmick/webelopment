@@ -6,6 +6,7 @@ use \assets\inc\classes\PDODatabase;
 $files = array( 			// Array, 1 = include files, 0 = no include
 	"classes" => array( 	// Classes
 		"sql.class.php" => 1, 		// SQL class
+		"route.class.php" => 1,		// Routing class
 	),
 	"functions" => array( 	// Functions
 		"functions.inc.php" => 1, 	// Unordered functions

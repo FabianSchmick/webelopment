@@ -1,7 +1,6 @@
-<Files ~ "^\.(htaccess|htpasswd)$">
-deny from all
-</Files>
-Options Indexes
-ErrorDocument 404 404.html
-DirectoryIndex index.php       
-order deny,allow
+RewriteEngine On
+RewriteBase /website_skeleton/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php?uri=$1 [QSA,L]
