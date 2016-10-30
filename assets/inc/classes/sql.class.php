@@ -1,29 +1,37 @@
 <?php
 
-// Datenbank Verbindung
-function db_connect($dbserver, $dbuser, $dbpassword, $dbname)
+// Initialize PDO Object
+function initializePDOObject($dbType, $dbHost, $dbName, $dbUser, $dbPassword)
 {
-	$dbh = mysqli_connect ($dbserver, $dbuser, $dbpassword)
-	or die ("Fehler bei CONNECT");
-	mysqli_select_db ($dbh, $dbname)
-	or die ("Fehler bei SELECT_DB");
+	try{
+		$connection = new PDO($dbType.':host='.$dbHost.';dbname='.$dbName, $dbUser, $dbPassword);
+	} catch(PDOException $e) {
+		echo 'ERROR: '.$e->getMessage();
+	}
 
-	return $dbh;
+	return $connection;
 }
 
-// Datenbank Abfrage
-function db_query($sql, $dbh)
+// Query from PDO db
+function query(PDO $connection, $sql)
 {
-	$result = mysqli_query ($dbh, $sql)
-	or die ("Fehler bei QUERY <br> 
-	<li> Fehlernummer errno =" .mysqli_errno($dbh). " 
-	<li> Fehlertext error =" .mysqli_error($dbh));
+	try{
+		$results = $connection->query($sql);
+	} catch(PDOException $e) {
+		echo 'ERROR: '.$e->getMessage();
+	}
 
-	return $result;
+	return $results;
 }
 
-// Datenbank schliessen
-function db_close($dbh)
+// Find All from one table
+function findAll(PDO $connection, $table)
 {
-	mysqli_close($dbh);
+	try{
+		$results = $connection->query('SELECT * FROM'.$table);
+	} catch(PDOException $e) {
+		echo 'ERROR: '.$e->getMessage();
+	}
+
+	return $results;
 }

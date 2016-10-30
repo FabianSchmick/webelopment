@@ -1,7 +1,8 @@
 <?php
 
-// Datenbank Variablen
-$dbserver = "localhost";
-$dbuser = "root";
-$dbpassword =  "";
-$dbname = "application";
+// Database config
+$dbType     = "mysql";
+$dbHost     = "localhost";
+$dbName     = "application";
+$dbUser     = "root";
+$dbPassword = "";

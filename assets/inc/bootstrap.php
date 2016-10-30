@@ -1,26 +1,27 @@
 <?php
 
-// Einbinden aller Klassen, Konfigurationsdateien und Funktionen
-$files = array( 			// Array mit den Daten, eine 1 gibt an, dass das File includiert werden soll
-	"classes" => array( 	// Klassen
-		"sql.class.php" => 1, 		// SQL Klasse
+// Include all classes, config files und functions
+$files = array( 			// Array, 1 = include files, 0 = no include
+	"classes" => array( 	// Classes
+		"sql.class.php" => 1, 		// SQL class
 	),
-	"functions" => array( 	// Funktionen
-		"functions.inc.php" => 1, 	// Unzuordbare Funktionen
+	"functions" => array( 	// Functions
+		"functions.inc.php" => 1, 	// Unordered functions
 	),
-	"config" => array( 		// Konfigurationsdateien
-		"config.inc.php" => 1, 		// Allgemeine, änderbare Config
+	"config" => array( 		// Config Files
+		"config.inc.php" => 1, 		// Common config
 	)
 );
 
-foreach($files as $folder => $file_array) { 	// Array durchgehen
-	foreach($file_array as $file => $include) { // herunterbrechen
-		if($include) {	// Wenn include Bit gesetzt
-			include_once($folder."/".$file); 	// Dateien includieren
+foreach($files as $folder => $file_array) { 	// Loop Array
+	foreach($file_array as $file => $include) {
+		if($include) {	// If include Bit is set
+			include_once($folder."/".$file); 	// Include files
 		}
 	}
 }
 
-$dbh = db_connect($dbserver, $dbuser, $dbpassword, $dbname);
+$connection = initializePDOObject($dbType, $dbHost, $dbName, $dbUser, $dbPassword);
 
-//if(!isset($_SESSION)) { session_start(); }		// Session starten
+
+//if(!isset($_SESSION)) { session_start(); }		// Session start

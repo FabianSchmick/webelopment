@@ -1,18 +1,18 @@
 <?php
 
-// Aktive POST und SESSION anzeigen
+// Active POST and SESSION
 function dumpParameter()
 {
 	// Session Parameter 
-	echo"<h4>Sitzungsparameter SESSION</h4>";
+	echo"<h4>Session-parameter SESSION</h4>";
 	foreach($_SESSION as $key => $value){
-		echo"<br> Key: $key, Wert: $value";
+		echo"<br> Key: $key, Value: $value";
 	}
 
 	// Uebergabeparameter
-	echo"<h4>Formularparameter POST</h4>";
+	echo"<h4>Form-parameter POST</h4>";
 	foreach($_POST as $key => $value){
-		echo"<br> Key: $key, Wert: $value";
+		echo"<br> Key: $key, Value: $value";
 	}
 	echo"<hr>";
 }
