@@ -13,22 +13,21 @@ function initializePDOObject($dbType, $dbHost, $dbName, $dbUser, $dbPassword)
 }
 
 // Query from PDO db
-function query(PDO $connection, $sql)
+function query(PDO $connection, $sql, $bindings)
 {
-	try{
-		$results = $connection->query($sql);
-	} catch(PDOException $e) {
-		echo 'ERROR: '.$e->getMessage();
-	}
+	$stmt = $connection->prepare($sql);
+	$stmt->execute($bindings);
 
-	return $results;
+	$results = $stmt->fetchAll();
+
+	return $results ? $results : false;
 }
 
 // Find All from one table
 function findAll(PDO $connection, $table)
 {
 	try{
-		$results = $connection->query('SELECT * FROM'.$table);
+		$results = $connection->query('SELECT * FROM '.$table);
 	} catch(PDOException $e) {
 		echo 'ERROR: '.$e->getMessage();
 	}
