@@ -1,11 +1,30 @@
 <?php
 
+use assets\inc\classes\PDODatabase;
+
 /*
  * PDO examples
  */
 
 
-/* SELECT binding parameter */
+/* ---------------------------------------------------------------- */
+/*               Call query method from sql.class                   */
+/* ---------------------------------------------------------------- */
+
+
+
+$pdoDb = new PDODatabase($dbType, $dbHost, $dbName, $dbUser, $dbPassword);
+
+$connection = $pdoDb->initializePDOObject();
+
+$result = $pdoDb->query($connection, 'SELECT * FROM users WHERE id = :id', array('id' => $id));
+
+
+
+
+/* ---------------------------------------------------------------- */
+/*                  SELECT with binding parameter                   */
+/* ---------------------------------------------------------------- */
 
 $id = 1;    // Should be some dynamic variable
 
@@ -14,13 +33,6 @@ try{
 
     $stmt = $connection->prepare('SELECT * FROM users WHERE id = :id');  // This query is send of, before the variable is inserted
 
-
-    /* First method */
-    $stmt->execute( array (
-       'id' => $id          // Then the query is executed with the param (Secure SQL injection)
-    ));
-
-    /* Second method with type */
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);   // More secure, because of type
     $stmt->execute();
 
@@ -36,7 +48,9 @@ try{
 
 
 
-/* INSERT binding parameter */
+/* ---------------------------------------------------------------- */
+/*                   INSERT with binding parameter                  */
+/* ---------------------------------------------------------------- */
 
 try{
     $connection = new PDO($dbType.':host='.$dbHost.';dbname='.$dbName, $dbUser, $dbPassword);
@@ -52,5 +66,4 @@ try{
 } catch(PDOException $e) {
     echo 'ERROR: '.$e->getMessage();
 }
-
 
