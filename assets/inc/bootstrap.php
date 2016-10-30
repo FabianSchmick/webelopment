@@ -1,5 +1,7 @@
 <?php
 
+use \assets\inc\classes\PDODatabase;
+
 // Include all classes, config files und functions
 $files = array( 			// Array, 1 = include files, 0 = no include
 	"classes" => array( 	// Classes
@@ -21,7 +23,9 @@ foreach($files as $folder => $file_array) { 	// Loop Array
 	}
 }
 
-$connection = initializePDOObject($dbType, $dbHost, $dbName, $dbUser, $dbPassword);
+$pdoDb = new PDODatabase($dbType, $dbHost, $dbName, $dbUser, $dbPassword);
+
+$connection = $pdoDb->initializePDOObject();
 
 
 //if(!isset($_SESSION)) { session_start(); }		// Session start
