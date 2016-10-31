@@ -24,9 +24,11 @@ foreach($files as $folder => $file_array) { 	// Loop Array
 	}
 }
 
-$pdoDb = new PDODatabase($dbType, $dbHost, $dbName, $dbUser, $dbPassword);
+if ($dbNeeded) {
+	$pdoDb = new PDODatabase($dbType, $dbHost, $dbName, $dbUser, $dbPassword);
 
-$connection = $pdoDb->initializePDOObject();
+	$connection = $pdoDb->initializePDOObject();
+}
 
 
 //if(!isset($_SESSION)) { session_start(); }		// Session start
