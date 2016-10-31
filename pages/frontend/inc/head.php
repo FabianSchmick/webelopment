@@ -13,4 +13,5 @@
 
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" href=<?php echo ROOTDIR."assets/css/main.css" ?>>
+        <link rel="stylesheet" type="text/css" href=<?php echo ROOTDIR."assets/css/custom.css" ?>>
     </head>

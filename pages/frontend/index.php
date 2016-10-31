@@ -8,7 +8,7 @@ include 'inc/header.php';
 
 ?>
 
-<div id="container">
+<div class="container">
     <div id="main" class="">
         <h2>Hello World</h2>
     </div>
