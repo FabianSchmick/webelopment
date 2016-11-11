@@ -10,4 +10,8 @@ $route->add('/', function() {
 	require_once 'pages/frontend/index.php';
 });
 
-$route->submit();
+$findUrl = $route->submit();
+
+if (!$findUrl) {
+	include_once 'pages/frontend/errors/404_de.html';
+}

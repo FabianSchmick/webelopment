@@ -41,6 +41,7 @@ class Route
         $uri = trim($uri, $this->_trim);
 
         $replacementValues = array();
+        $findUrl = false;
 
         /**
          * List through the stored URI's
@@ -73,11 +74,11 @@ class Route
                  * Pass an array for arguments
                  */
                 call_user_func_array($this->_listCall[$listKey], $replacementValues);
-            } else {    // If no route was found
-                include_once 'pages/frontend/errors/404_de.html';
-            }
 
+                $findUrl =  true;
+            }
         }
 
+        return $findUrl;
     }
 }
