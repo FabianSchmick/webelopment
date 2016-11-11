@@ -313,7 +313,9 @@ hr {
 
 /* ----- Buttons ----- */
 
-.btn {
+.btn,
+.form input[type="button"],
+.form input[type="submit"] {
     font-family: inherit;
     font-size: inherit;
     color: inherit;
@@ -331,12 +333,16 @@ hr {
     transition: all 0.3s;
 }
 
-.btn-neutral {
+.btn-neutral,
+.form input[type="button"],
+.form input[type="submit"] {
     background: none;
     border: 3px solid #CFCFCF;
 }
-.btn-neutral:hover {
-    color: #fff;
+.btn-neutral:hover,
+.form input[type="button"]:hover,
+.form input[type="submit"]:hover {
+    color: #000;
     background: #CFCFCF;
 }
 
@@ -356,6 +362,46 @@ hr {
 .btn-negative:hover {
     color: #fff;
     background: #D13B3B;
+}
+
+
+/* ----- Inputs for forms ----- */
+
+.form{
+    color: inherit;
+}
+
+.form input[type="text"],
+.form input[type="date"],
+.form input[type="datetime"],
+.form input[type="email"],
+.form input[type="number"],
+.form input[type="search"],
+.form input[type="time"],
+.form input[type="url"],
+.form input[type="password"],
+.form textarea,
+.form select
+{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 10px;
+    font: 16px Arial, Helvetica, sans-serif;
+    height: 45px;
+    color: inherit;
+}
+.form textarea{
+    resize: vertical;
+    overflow: hidden;
+    min-height: 75px;
 }
 
 
