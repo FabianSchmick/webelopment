@@ -1,13 +1,12 @@
 <?php
 
-// Database config
-$dbNeeded   = true;         // Change to false if no db is needed
-// Only required if $dbNeeded is set to true
-$dbType     = "mysql";
-$dbHost     = "localhost";
-$dbName     = "application";
-$dbUser     = "root";
-$dbPassword = "";
+return [
 
-// Document paths
-define('ROOTDIR', '/');
+    // Database config
+    "dbType"     => "mysql",
+    "dbHost"     => "localhost",
+    "dbName"     => "application",
+    "dbUser"     => "root",
+    "dbPassword" => "",
+
+];

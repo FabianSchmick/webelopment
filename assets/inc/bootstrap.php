@@ -12,7 +12,7 @@ $files = array( 			// Array, 1 = include files, 0 = no include
 		"functions.inc.php" => 1, 	// Unordered functions
 	),
 	"config" => array( 		// Config Files
-		"config.inc.php" => 1, 		// Common config
+		"global.config.inc.php" => 1, 		// Global config
 	)
 );
 
@@ -24,8 +24,15 @@ foreach($files as $folder => $file_array) { 	// Loop Array
 	}
 }
 
-if ($dbNeeded) {
-	$pdoDb = new PDODatabase($dbType, $dbHost, $dbName, $dbUser, $dbPassword);
+$config = include('config/config.inc.php');		// Common config
+
+if (isset($config['dbType']) &&
+	isset($config['dbHost']) &&
+	isset($config['dbName']) &&
+	isset($config['dbUser']) &&
+	isset($config['dbPassword'])) {
+
+	$pdoDb = new PDODatabase($config['dbType'], $config['dbHost'], $config['dbName'], $config['dbUser'], $config['dbPassword']);
 
 	$connection = $pdoDb->initializePDOObject();
 }
