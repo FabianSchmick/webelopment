@@ -2,14 +2,11 @@
 
 require_once "autoload.php";
 
-// Include all functions and config files
+// Include all function files
 $files = array( 			// Array, 1 = include files, 0 = no include
 	"functions" => array( 	// Functions
 		"functions.inc.php" => 1, 	// Unordered functions
 	),
-	"config" => array( 		// Config Files
-		"global.config.inc.php" => 1, 		// Global config
-	)
 );
 
 foreach($files as $folder => $file_array) { 	// Loop Array
