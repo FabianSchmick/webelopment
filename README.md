@@ -12,9 +12,7 @@ Optional:
 - Database like MySQL
 
 ## Get started
-- Go into *assets/inc/config/config.inc.php* and decide if a database is needed and set the variable $dbNeeded to **true** or **false**.
-	- If true config the database variables.
-- Define the ROOT path (this is needed for the assets).
+- Go to *assets/inc/config/config.inc.php* and configure your application .
 
 ## Documentation
 

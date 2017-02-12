@@ -26,6 +26,14 @@ foreach($files as $folder => $file_array) { 	// Loop Array
 
 $config = include('config/config.inc.php');		// Common config
 
+// Show debug messages
+if ($config['debug']) {
+	error_reporting(E_ALL);
+	ini_set("display_errors", 1);
+} else {
+	error_reporting(0);
+}
+
 if (isset($config['dbType']) &&
 	isset($config['dbHost']) &&
 	isset($config['dbName']) &&
