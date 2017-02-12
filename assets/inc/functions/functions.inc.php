@@ -4,15 +4,15 @@
 function dumpParameter()
 {
 	// Session Parameter 
-	echo"<h4>Session-parameter SESSION</h4>";
+	echo"<h4>----- SESSION -----</h4>";
 	foreach($_SESSION as $key => $value){
-		echo"<br> Key: $key, Value: $value";
+		echo "<br> Key: $key, Value: $value";
 	}
 
-	// Uebergabeparameter
-	echo"<h4>Form-parameter POST</h4>";
+	// Post Parameter
+	echo"<h4>----- POST -----</h4>";
 	foreach($_POST as $key => $value){
-		echo"<br> Key: $key, Value: $value";
+		echo "<br> Key: $key, Value: $value";
 	}
-	echo"<hr>";
+	echo "<hr>";
 }
