@@ -1,6 +1,6 @@
 <?php
 
-namespace assets\inc\classes;
+namespace application;
 
 class Route
 {

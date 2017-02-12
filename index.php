@@ -1,8 +1,8 @@
 <?php
 
-require 'assets/inc/classes/route.class.php';
+require 'assets/inc/bootstrap.php';
 
-use \assets\inc\classes\Route;
+use application\Route;
 
 $route = new Route();
 

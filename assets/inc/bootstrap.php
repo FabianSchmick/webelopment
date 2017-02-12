@@ -1,13 +1,9 @@
 <?php
 
-use \assets\inc\classes\PDODatabase;
+require_once "autoload.php";
 
-// Include all classes, config files und functions
+// Include all functions and config files
 $files = array( 			// Array, 1 = include files, 0 = no include
-	"classes" => array( 	// Classes
-		"sql.class.php" => 1, 		// SQL class
-		"route.class.php" => 1,		// Routing class
-	),
 	"functions" => array( 	// Functions
 		"functions.inc.php" => 1, 	// Unordered functions
 	),
@@ -23,6 +19,8 @@ foreach($files as $folder => $file_array) { 	// Loop Array
 		}
 	}
 }
+
+use database\PDODatabase;
 
 $config = include('config/config.inc.php');		// Common config
 

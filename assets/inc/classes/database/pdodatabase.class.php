@@ -1,6 +1,6 @@
 <?php
 
-namespace assets\inc\classes;
+namespace database;
 
 use PDO;
 use PDOException;
