@@ -2,7 +2,7 @@
 
 return [
 
-    // True, prints out php errors
+    // True will display php errors
     "debug"      => true,
 
     // Path for the assets

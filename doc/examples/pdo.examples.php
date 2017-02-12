@@ -1,6 +1,6 @@
 <?php
 
-use assets\inc\classes\PDODatabase;
+use database\PDODatabase;
 
 /*
  * PDO examples
@@ -8,12 +8,12 @@ use assets\inc\classes\PDODatabase;
 
 
 /* ---------------------------------------------------------------- */
-/*               Call query method from sql.class                   */
+/*                Call query method from PDODatabase                */
 /* ---------------------------------------------------------------- */
 
 
 
-$pdoDb = new PDODatabase($dbType, $dbHost, $dbName, $dbUser, $dbPassword);
+$pdoDb = new PDODatabase("type", "host", "name", "user", "password");
 
 $connection = $pdoDb->initializePDOObject();
 
@@ -29,7 +29,9 @@ $result = $pdoDb->query($connection, 'SELECT * FROM users WHERE id = :id', array
 $id = 1;    // Should be some dynamic variable
 
 try{
-    $connection = new PDO($dbType.':host='.$dbHost.';dbname='.$dbName, $dbUser, $dbPassword);
+    $pdoDb = new PDODatabase("type", "host", "name", "user", "password");
+
+    $connection = $pdoDb->initializePDOObject();
 
     $stmt = $connection->prepare('SELECT * FROM users WHERE id = :id');  // This query is send of, before the variable is inserted
 
@@ -53,7 +55,9 @@ try{
 /* ---------------------------------------------------------------- */
 
 try{
-    $connection = new PDO($dbType.':host='.$dbHost.';dbname='.$dbName, $dbUser, $dbPassword);
+    $pdoDb = new PDODatabase("type", "host", "name", "user", "password");
+
+    $connection = $pdoDb->initializePDOObject();
 
     $stmt = $connection->prepare('INSERT INTO users(username) VALUES(:username)');  // This query is send of, before the variable is inserted
     $stmt->bindParam('username', $username, PDO::PARAM_STR);

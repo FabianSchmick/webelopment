@@ -2,6 +2,8 @@
 
 require_once "autoload.php";
 
+use database\PDODatabase;
+
 // Include all function files
 $files = array( 			// Array, 1 = include files, 0 = no include
 	"functions" => array( 	// Functions
@@ -17,11 +19,9 @@ foreach($files as $folder => $file_array) { 	// Loop Array
 	}
 }
 
-use database\PDODatabase;
-
 $config = include('config/config.inc.php');		// Common config
 
-// Show debug messages
+// Display debug messages
 if ($config['debug']) {
 	error_reporting(E_ALL);
 	ini_set("display_errors", 1);
@@ -29,6 +29,7 @@ if ($config['debug']) {
 	error_reporting(0);
 }
 
+// Database object initialization
 if (isset($config['dbType']) &&
 	isset($config['dbHost']) &&
 	isset($config['dbName']) &&
@@ -39,6 +40,3 @@ if (isset($config['dbType']) &&
 
 	$connection = $pdoDb->initializePDOObject();
 }
-
-
-//if(!isset($_SESSION)) { session_start(); }		// Session start
