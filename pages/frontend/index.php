@@ -2,7 +2,7 @@
 
 $title = "Title";
 
-require 'assets/inc/bootstrap.php';
+require 'app/bootstrap.php';
 include 'inc/head.php';
 include 'inc/header.php';
 

@@ -1,6 +1,6 @@
 <?php
 
-require 'assets/inc/bootstrap.php';
+require 'app/bootstrap.php';
 
 use application\Route;
 

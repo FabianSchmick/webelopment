@@ -12,7 +12,7 @@ Optional:
 - Database like MySQL
 
 ## Get started
-- Go to *assets/inc/config/config.inc.php* and configure your application .
+- Go to *app/config/config.inc.php* and configure your application .
 
 ## Documentation
 
