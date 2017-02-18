@@ -7,5 +7,7 @@ spl_autoload_register(function($className)
     $className = str_replace("\\", "/", $className);
     $class = __DIR__. "/classes/" . (empty($namespace) ? "" : $namespace."/") . "{$className}.class.php";
 
-    include_once($class);
+    if (file_exists($class)) {
+        include_once($class);
+    }
 });

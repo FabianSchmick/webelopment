@@ -10,6 +10,7 @@ What you need:
 
 Optional:
 - Database like MySQL
+- Composer package manager
 
 ## Get started
 - Go to *app/config/config.inc.php* and configure your application .
