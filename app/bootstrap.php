@@ -11,12 +11,13 @@ if (file_exists(__DIR__ . "/../vendor/autoload.php")) {
 include_once __DIR__ . "/functions/functions.inc.php";
 
 use database\PDODatabase;
+use config\Config;
 
 
-$config = include __DIR__ . '/config/config.inc.php';		// Common config
+$config = new Config();
 
 // Display debug messages
-if ($config['debug']) {
+if ($config->debug) {
 	error_reporting(E_ALL);
 	ini_set("display_errors", 1);
 } else {
@@ -24,13 +25,13 @@ if ($config['debug']) {
 }
 
 // Database object initialization
-if (isset($config['dbType']) &&
-	isset($config['dbHost']) &&
-	isset($config['dbName']) &&
-	isset($config['dbUser']) &&
-	isset($config['dbPassword'])) {
+if (isset($config->dbType) &&
+	isset($config->dbHost) &&
+	isset($config->dbName) &&
+	isset($config->dbUser) &&
+	isset($config->dbPassword)) {
 
-	$pdoDb = new PDODatabase($config['dbType'], $config['dbHost'], $config['dbName'], $config['dbUser'], $config['dbPassword']);
+	$pdoDb = new PDODatabase($config->dbType, $config->dbHost, $config->dbName, $config->dbUser, $config->dbPassword);
 
 	$connection = $pdoDb->initializePDOObject();
 }
