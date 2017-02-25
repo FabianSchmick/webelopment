@@ -1,6 +1,6 @@
 <?php
 
-require 'app/bootstrap.php';
+require __DIR__ . '/app/bootstrap.php';
 
 use application\Route;
 

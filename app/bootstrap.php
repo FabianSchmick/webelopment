@@ -13,7 +13,7 @@ include_once __DIR__ . "/functions/functions.inc.php";
 use database\PDODatabase;
 
 
-$config = include('config/config.inc.php');		// Common config
+$config = include __DIR__ . '/config/config.inc.php';		// Common config
 
 // Display debug messages
 if ($config['debug']) {
