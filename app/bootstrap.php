@@ -11,10 +11,10 @@ if (file_exists(__DIR__ . "/../vendor/autoload.php")) {
 include_once __DIR__ . "/functions/functions.inc.php";
 
 use database\PDODatabase;
-use config\Config;
+use application\Config;
 
 
-$config = new Config();
+$config = new Config('config.inc.php');
 
 // Display debug messages
 if ($config->debug) {

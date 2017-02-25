@@ -1,6 +1,6 @@
 <?php
 
-namespace config;
+namespace application;
 
 class Config
 {
@@ -10,9 +10,9 @@ class Config
     private $config;
 
     // Constructor
-    public function __construct()
+    public function __construct($file)
     {
-        $config = include __DIR__ . '/../../config/config.inc.php';
+        $config = include __DIR__ . '/../../config/' . $file;
 
         $this->config = $config;
     }
