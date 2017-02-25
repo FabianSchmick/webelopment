@@ -7,22 +7,11 @@ if (file_exists(__DIR__ . "/../vendor/autoload.php")) {
 	require_once __DIR__ . "/../vendor/autoload.php";
 }
 
+// Unordered functions
+include_once __DIR__ . "/functions/functions.inc.php";
+
 use database\PDODatabase;
 
-// Include all function files
-$files = array( 			// Array, 1 = include files, 0 = no include
-	"functions" => array( 	// Functions
-		"functions.inc.php" => 1, 	// Unordered functions
-	),
-);
-
-foreach($files as $folder => $file_array) { 	// Loop Array
-	foreach($file_array as $file => $include) {
-		if($include) {	// If include Bit is set
-			include_once($folder."/".$file); 	// Include files
-		}
-	}
-}
 
 $config = include('config/config.inc.php');		// Common config
 
