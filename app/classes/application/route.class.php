@@ -7,12 +7,12 @@ class Route
     /**
      * @var array $_listUri List of URI's to match against
      */
-    private $_listUri = array();
+    private $_listUri = [];
 
     /**
      * @var array $_listCall List of closures to call
      */
-    private $_listCall = array();
+    private $_listCall = [];
 
     /**
      * @var string $_trim Class-wide items to clean
@@ -34,6 +34,8 @@ class Route
 
     /**
      * submit - Looks for a match for the URI and runs the related function
+     *
+     * @return bool $findUrl If URL was found
      */
     public function submit()
     {

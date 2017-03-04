@@ -4,24 +4,30 @@ namespace application;
 
 class Application
 {
-    /*
-     * Config array
+    /**
+     * @var array $config Config array;
      */
     private $config = [];
 
-
+    /**
+     * Application constructor.
+     */
     public function __construct()
     {
         $this->config = new Config('config.inc.php');
     }
 
-    // Runs the application
+    /**
+     * Runs the application
+     */
     public function run()
     {
         $this->checkDebugMode();
     }
 
-    // Sets Error Reporting
+    /**
+     * Sets error reporting
+     */
     public function checkDebugMode()
     {
         // Display debug messages
@@ -33,7 +39,11 @@ class Application
         }
     }
 
-    // Include files
+    /**
+     * Include files
+     *
+     * @param array $files The files to be included
+     */
     public function includeFiles($files = [])
     {
         foreach($files as $folder => $file_array) { 	// Loop Array
@@ -43,7 +53,11 @@ class Application
         }
     }
 
-    // Database object initialization
+    /**
+     * Database object initialization
+     *
+     * @return \PDO|string The Db connection|Error message
+     */
     public function initDbConnection()
     {
         if (!empty($this->config->dbType) &&
