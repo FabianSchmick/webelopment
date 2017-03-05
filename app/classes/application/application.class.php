@@ -25,6 +25,9 @@ class Application
         $this->checkDebugMode();
     }
 
+    /**
+     * Initialises the routes defined in app/config/routes.inc.php
+     */
     public function initRoutes()
     {
         $route = new Route();

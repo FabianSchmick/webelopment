@@ -95,7 +95,7 @@ class Route
                  */
                 call_user_func_array($this->_listCall[$listKey], [$replacementValues]);
 
-                $findUrl =  true;
+                $findUrl = true;
             }
         }
 
