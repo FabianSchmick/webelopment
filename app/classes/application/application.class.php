@@ -25,6 +25,33 @@ class Application
         $this->checkDebugMode();
     }
 
+    public function initRoutes()
+    {
+        $route = new Route();
+
+        $routesConf = include __DIR__ . '/../../config/routes.inc.php';
+
+        foreach ($routesConf as $routeConf) {
+
+            $uri = $routeConf['uri'];
+
+            if (preg_match_all('/\$(.*?(?=\/)|.*?$)/', $routeConf['uri'], $matches)) {
+                $uri = preg_replace('/\$(.*?(?=\/)|.*?$)/', '.*', $routeConf['uri']);
+            }
+
+            $route->add($uri, $routeConf, $matches[1], function($params) {
+                require_once __DIR__ . '/../../../pages/' . $params['config']['target'];
+            });
+        }
+
+        $findUrl = $route->submit();
+
+        if (!$findUrl) {
+            header('HTTP/1.0 404 Not Found');
+            include_once __DIR__ . '/../../../pages/frontend/errors/404_de.html';
+        }
+    }
+
     /**
      * Sets error reporting
      */

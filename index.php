@@ -2,16 +2,4 @@
 
 require __DIR__ . '/app/bootstrap.php';
 
-use application\Route;
-
-$route = new Route();
-
-$route->add('/', function() {
-	require_once 'pages/frontend/index.php';
-});
-
-$findUrl = $route->submit();
-
-if (!$findUrl) {
-	include_once 'pages/frontend/errors/404_de.html';
-}
+$app->initRoutes();

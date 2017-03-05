@@ -14,6 +14,7 @@ Optional:
 
 ## Get started
 - Go to *app/config/config.inc.php* and configure your application .
+- Go to *app/config/route.inc.php* and define your routes.
 
 ## Documentation
 
