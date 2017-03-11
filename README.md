@@ -7,12 +7,13 @@ Simple Framework for Web development.
 What you need:
 - PHP version > 5.6
 - A webserver like Apache
+- Composer package manager
 
 Optional:
 - Database like MySQL
-- Composer package manager
 
 ## Get started
+- Run *composer install*
 - Go to *app/config/config.inc.php* and configure your application .
 - Go to *app/config/route.inc.php* and define your routes.
 
