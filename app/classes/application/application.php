@@ -70,11 +70,12 @@ class Application
     public function checkDebugMode()
     {
         // Display debug messages
-        if ($this->config->debug) {
+        if ($this->config->debug == true) {
             error_reporting(E_ALL);
             ini_set("display_errors", 1);
         } else {
             error_reporting(0);
+            ini_set("display_errors", 0 );
         }
     }
 
