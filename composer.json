@@ -1,4 +1,21 @@
 {
+    "name": "webelopment/webelopment",
+    "description": "Framework for Web development",
+    "type": "project",
+    "keywords": [ "html", "php", "css", "framework", "web-development" ],
+    "homepage": "https://github.com/FabianSchmick/webelopment",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fabian Schmick",
+            "email": "schmick.fabian@web.de",
+            "homepage": "http://www.fabian-schmick.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.6"
+    },
     "autoload": {
         "psr-4": {
             "": "app/classes"
