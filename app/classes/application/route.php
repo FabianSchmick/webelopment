@@ -42,7 +42,7 @@ class Route
         $uri = trim($uri, $this->_trim);
         $this->_listUri[] = $uri;
         $this->_listCall[] = $function;
-        $this->_config = $config;
+        $this->_config[] = $config;
         $this->_argsName = $argsName;
     }
 
@@ -88,7 +88,7 @@ class Route
                     }
                 }
 
-                $replacementValues['config'] = $this->_config;
+                $replacementValues['config'] = $this->_config[$listKey];
 
                 /**
                  * Pass an array for arguments
