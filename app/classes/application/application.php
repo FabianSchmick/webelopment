@@ -52,7 +52,7 @@ class Application
                 $this->routeConfig = new Config();
                 $this->routeConfig->initFromArr($params);
 
-                require_once __DIR__ . '/../../../pages/' . $params['config']['target'];
+                require_once __DIR__ . '/../../../pages/' . $this->routeConfig->config['target'];
             });
         }
 

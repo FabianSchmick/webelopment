@@ -17,7 +17,7 @@ return [
     // Complex route with parameters
     'star_wars' => [
         'name'      => 'Star Wars',
-        // Use the params in target with: $params['arguments']['force'] or $params['arguments']['you']
+        // Use the params in target with: $this->routeConfig->arguments['force'] or $this->routeConfig->arguments['you']
         'uri'       => '/may/the/$force/be/with/$you',
         'target'    => 'frontend/index.php'
     ],
