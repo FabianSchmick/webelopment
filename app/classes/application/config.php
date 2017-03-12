@@ -10,14 +10,21 @@ class Config
     private $config = [];
 
     /**
-     * Config constructor.
      * @param string $file The filename
      */
-    public function __construct($file)
+    public function loadFromFile($file)
     {
         $config = include __DIR__ . '/../../config/' . $file;
 
         $this->config = $config;
+    }
+
+    /**
+     * @param array $arr Array with config data
+     */
+    public function initFromArr($arr)
+    {
+        $this->config = $arr;
     }
 
     /**

@@ -10,6 +10,3 @@ $app = new Application();
 
 $app->run();
 $app->includeFiles(['functions' => ["functions.inc.php"]]);
-
-// Global config object
-$config = new Config('config.inc.php');

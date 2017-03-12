@@ -10,11 +10,17 @@ class Application
     private $config = [];
 
     /**
+     * @var array $routeConfig Config of the current route
+     */
+    private $routeConfig = [];
+
+    /**
      * Application constructor.
      */
     public function __construct()
     {
-        $this->config = new Config('config.inc.php');
+        $this->config = new Config();
+        $this->config->loadFromFile('config.inc.php');
     }
 
     /**
@@ -43,6 +49,9 @@ class Application
             }
 
             $route->add($uri, $routeConf, $matches[1], function($params) {
+                $this->routeConfig = new Config();
+                $this->routeConfig->initFromArr($params);
+
                 require_once __DIR__ . '/../../../pages/' . $params['config']['target'];
             });
         }
