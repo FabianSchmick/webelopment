@@ -10,6 +10,8 @@ class Config
     private $config = [];
 
     /**
+     * Loads config from a file
+     *
      * @param string $file The filename
      */
     public function loadFromFile($file)
@@ -20,6 +22,8 @@ class Config
     }
 
     /**
+     * Loads config from an array
+     *
      * @param array $arr Array with config data
      */
     public function initFromArr($arr)
