@@ -52,6 +52,7 @@ class Application
                 $this->routeConfig = new Config();
                 $this->routeConfig->initFromArr($params);
 
+                require_once __DIR__ . '/../../bootstrap.php';
                 require_once __DIR__ . '/../../../pages/' . $this->routeConfig->config['target'];
             });
         }

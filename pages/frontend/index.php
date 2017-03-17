@@ -2,7 +2,6 @@
 
 $title = "Title";
 
-require 'app/bootstrap.php';
 include 'inc/head.php';
 include 'inc/header.php';
 
