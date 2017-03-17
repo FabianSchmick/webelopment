@@ -32,6 +32,11 @@ class PDODatabase
 	 */
 	private $dbPassword = "";
 
+	/**
+	 * @var PDO $connection Db connection
+	 */
+	private $connection;
+
 
 	/**
 	 * PDODatabase constructor.
@@ -60,28 +65,25 @@ class PDODatabase
 	public function initializePDOObject()
 	{
 		try{
-			$connection = new PDO($this->dbType.':host='.$this->dbHost.';dbname='.$this->dbName, $this->dbUser, $this->dbPassword);
+			$this->connection = new PDO($this->dbType.':host='.$this->dbHost.';dbname='.$this->dbName, $this->dbUser, $this->dbPassword);
 		} catch(PDOException $e) {
 			echo 'ERROR: '.$e->getMessage();
 		}
-
-		return $connection;
 	}
 
 	/**
 	 * Query from PDO db
 	 *
-	 * @param PDO $connection Db connection
 	 * @param string $sql SQL statement
-	 * @param mixed $bindings Bindings for the SQL statement
+	 * @param array $bindings Bindings for the SQL statement
 	 * @return array|bool Query result
 	 */
-	public function query(PDO $connection, $sql, $bindings)
+	public function query($sql, $bindings = [])
 	{
-		$stmt = $connection->prepare($sql);
+		$stmt = $this->connection->prepare($sql);
 		$stmt->execute($bindings);
 
-		$results = $stmt->fetchAll();
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		return $results ? $results : false;
 	}
@@ -89,14 +91,13 @@ class PDODatabase
 	/**
 	 * Find All from one table
 	 *
-	 * @param PDO $connection Db connection
 	 * @param string $table The table to query
 	 * @return \PDOStatement Query result
 	 */
-	public function findAll(PDO $connection, $table)
+	public function findAll($table)
 	{
 		try{
-			$results = $connection->query('SELECT * FROM '.$table);
+			$results = $this->connection->query('SELECT * FROM ' . $table)->fetchAll(PDO::FETCH_ASSOC);
 		} catch(PDOException $e) {
 			echo 'ERROR: '.$e->getMessage();
 		}

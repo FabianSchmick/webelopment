@@ -15,12 +15,18 @@ class Application
     private $routeConfig = [];
 
     /**
+     * @var \database\PDODatabase $db PDO database object
+     */
+    private $db;
+
+    /**
      * Application constructor.
      */
     public function __construct()
     {
         $this->config = new Config();
         $this->config->loadFromFile('config.inc.php');
+        $this->db = $this->initDbConnection();
     }
 
     /**
@@ -115,11 +121,11 @@ class Application
                 $this->config->dbPassword
             );
 
-            $connection = $pdoDb->initializePDOObject();
+            $pdoDb->initializePDOObject();
         } else {
-            $connection = "Error - no database connection configured.";
+            $pdoDb = "Error - no database connection configured.";
         }
 
-        return $connection;
+        return $pdoDb;
     }
 }
