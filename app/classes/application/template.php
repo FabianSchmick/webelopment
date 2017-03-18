@@ -4,8 +4,6 @@ namespace application;
 
 /**
  * Simple template engine class (use [@tag] tags in your templates).
- *
- * TODO: Do PHP functions in tpl files accessible
  */
 class Template
 {
@@ -51,7 +49,9 @@ class Template
         if (!file_exists($this->file)) {
             return "Error loading template file ($this->file).<br />";
         }
-        $output = file_get_contents($this->file);
+        ob_start();
+        require $this->file;
+        $output = ob_get_clean();
 
         foreach ($this->values as $key => $value) {
             $tagToReplace = "[@$key]";
