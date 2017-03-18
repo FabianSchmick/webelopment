@@ -79,20 +79,50 @@ class Application
         }
     }
 
+    /**
+     * Renders a template
+     *
+     * @param string $tpl The template filename
+     * @param array $vars The template variables
+     */
     public function renderTpl($tpl, $vars = [])
     {
         // Init the content with optional variables
         $profile = new Template(__DIR__ . '/../../../pages/frontend/' . $tpl);
         $profile->set($vars);
 
-        $header = new Template(__DIR__ . '/../../layout/' . 'header.tpl');
+        // Get the layout
+        $layout = $this->renderLayout($this->routeConfig->config['layout']);
 
+        // Put layout and content together
+        if (!isset($this->routeConfig->config['title'])) {
+            $layout['vars']['title'] = $this->routeConfig->config['name'];
+        } else {
+            $layout['vars']['title'] = $this->routeConfig->config['title'];
+        }
+        $layout['vars']['content'] = $profile->output();
+        $layout['layout']->set($layout['vars']);
 
+        echo $layout['layout']->output();
+    }
+
+    /**
+     * Renders a layout for templates
+     *
+     * @param string $file The filename
+     * @return array
+     */
+    public function renderLayout($file)
+    {
         // Init the layout for the content
-        $useLayout = $this->routeConfig->config['layout'];
-        $layoutVars = $this->config->$useLayout;
+        $layoutVars = $this->config->$file;
 
-        $layout = new Template(__DIR__ . '/../../layout/' . $useLayout);
+        if (isset($layoutVars['header'])) {
+            $header = new Template(__DIR__ . '/../../layout/' . $layoutVars['header']);
+            $layoutVars['header'] = $header->output();
+        }
+
+        $layout = new Template(__DIR__ . '/../../layout/' . $file);
 
         // Define the layouts variables
         foreach ($layoutVars as $key => $layoutVar) {
@@ -105,18 +135,10 @@ class Application
             }
         }
 
-        // Put all together
-        if (!isset($this->routeConfig->config['title'])) {
-            $layoutVars['title'] = $this->routeConfig->config['name'];
-        } else {
-            $layoutVars['title'] = $this->routeConfig->config['title'];
-        }
-        $layoutVars['header'] = $header->output();
-        $layoutVars['content'] = $profile->output();
-
-        $layout->set($layoutVars);
-
-        echo $layout->output();
+        return [
+            'layout' => $layout,
+            'vars'   => $layoutVars,
+        ];
     }
 
     /**

@@ -7,7 +7,7 @@ return [
         'name'      => 'Home',
         'uri'       => '/',
         'backend'   => 'index.php',
-        'template'  => 'index.tpl',
+        'template'  => 'index.tpl.php',
         'layout'    => 'layout.tpl',
     ],
 
