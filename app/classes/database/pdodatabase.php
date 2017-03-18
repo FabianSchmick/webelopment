@@ -89,6 +89,21 @@ class PDODatabase
 	}
 
 	/**
+	 * Create (Insert), update and delete records
+	 *
+	 * @param string $sql SQL statement
+	 * @param array $bindings Bindings for the SQL statement
+	 * @return int Number of last affected rows
+	 */
+	public function cud($sql, $bindings)
+	{
+		$stmt = $this->connection->prepare($sql);
+		$stmt->execute($bindings);
+
+		return $stmt->rowCount();
+	}
+
+	/**
 	 * Find All from one table
 	 *
 	 * @param string $table The table to query
