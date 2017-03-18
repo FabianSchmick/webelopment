@@ -26,6 +26,7 @@ class Application
     {
         $this->config = new Config();
         $this->config->loadFromFile('config.inc.php');
+        $this->routeConfig = new Config();
         $this->db = $this->initDbConnection();
     }
 
@@ -55,7 +56,6 @@ class Application
             }
 
             $route->add($uri, $routeConf, $matches[1], function($params) {
-                $this->routeConfig = new Config();
                 $this->routeConfig->initFromArr($params);
 
                 require_once __DIR__ . '/../../bootstrap.php';
