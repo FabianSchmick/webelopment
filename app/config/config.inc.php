@@ -8,6 +8,16 @@ return [
     // Path for the assets
     "assetsPath" => "/assets",
 
+    // Layout values
+    "layout.tpl" => [
+
+        "main.css"   => "main.css",
+        "custom.css" => "custom.css",
+        "main.js"    => "main.js",
+        "favicon"    => "favicon.ico",
+
+    ],
+
     // Database config
     "dbType"     => "mysql",
     "dbHost"     => "localhost",

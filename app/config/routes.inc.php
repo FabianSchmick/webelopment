@@ -6,7 +6,9 @@ return [
     'home'      => [
         'name'      => 'Home',
         'uri'       => '/',
-        'target'    => 'frontend/index.php'
+        'backend'   => 'index.php',
+        'template'  => 'index.tpl',
+        'layout'    => 'layout.tpl',
     ],
 
 ];

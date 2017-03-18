@@ -58,8 +58,16 @@ class Application
             $route->add($uri, $routeConf, $matches[1], function($params) {
                 $this->routeConfig->initFromArr($params);
 
-                require_once __DIR__ . '/../../bootstrap.php';
-                require_once __DIR__ . '/../../../pages/' . $this->routeConfig->config['target'];
+                /**
+                 * TODO Better solution for backend stuff, thought about something like a controller
+                 */
+                if (isset($this->routeConfig->config['backend'])) {
+                    $vars = require_once __DIR__ . "/../../../pages/backend/" . $this->routeConfig->config['backend'];
+                } else {
+                    $vars = [];
+                }
+
+                $this->renderTpl($this->routeConfig->config['template'], $vars);
             });
         }
 
@@ -69,6 +77,46 @@ class Application
             header('HTTP/1.0 404 Not Found');
             include_once __DIR__ . '/../../../pages/frontend/errors/404_de.html';
         }
+    }
+
+    public function renderTpl($tpl, $vars = [])
+    {
+        // Init the content with optional variables
+        $profile = new Template(__DIR__ . '/../../../pages/frontend/' . $tpl);
+        $profile->set($vars);
+
+        $header = new Template(__DIR__ . '/../../layout/' . 'header.tpl');
+
+
+        // Init the layout for the content
+        $useLayout = $this->routeConfig->config['layout'];
+        $layoutVars = $this->config->$useLayout;
+
+        $layout = new Template(__DIR__ . '/../../layout/' . $useLayout);
+
+        // Define the layouts variables
+        foreach ($layoutVars as $key => $layoutVar) {
+            if (preg_match('/\w*(.css)/', $key)) {
+                $layoutVars[$key] = preg_replace('/\w*(.css)/', '/../../..' . $this->config->assetsPath .'/css/'. $layoutVar, $key);
+            }
+
+            if (preg_match('/\w*(.js)/', $key)) {
+                $layoutVars[$key] = preg_replace('/\w*(.js)/', '/../../..' . $this->config->assetsPath .'/js/'. $layoutVar, $key);
+            }
+        }
+
+        // Put all together
+        if (!isset($this->routeConfig->config['title'])) {
+            $layoutVars['title'] = $this->routeConfig->config['name'];
+        } else {
+            $layoutVars['title'] = $this->routeConfig->config['title'];
+        }
+        $layoutVars['header'] = $header->output();
+        $layoutVars['content'] = $profile->output();
+
+        $layout->set($layoutVars);
+
+        echo $layout->output();
     }
 
     /**
