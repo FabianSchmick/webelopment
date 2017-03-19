@@ -4,7 +4,7 @@
 /* ---------------------------------------------------------------- */
 ?>
 
-<!-- In pages/frontend/inc/header -->
+<!-- In app/layout/header.tpl -->
 <nav class="nav">
 	<ul>
 		<li class="active"><a href="#">Home</a></li>
