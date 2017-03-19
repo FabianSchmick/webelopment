@@ -58,16 +58,9 @@ class Application
             $route->add($uri, $routeConf, $matches[1], function($params) {
                 $this->routeConfig->initFromArr($params);
 
-                /**
-                 * TODO Better solution for backend stuff, thought about something like a controller
-                 */
-                if (isset($this->routeConfig->config['backend'])) {
-                    $vars = require_once __DIR__ . "/../../../pages/backend/" . $this->routeConfig->config['backend'];
-                } else {
-                    $vars = [];
-                }
+                $controller = new $this->routeConfig->config['controller']($this->config, $this->routeConfig, $this->db);
 
-                $this->renderTpl($this->routeConfig->config['template'], $vars);
+                $controller->indexAction();
             });
         }
 
@@ -77,68 +70,6 @@ class Application
             header('HTTP/1.0 404 Not Found');
             include_once __DIR__ . '/../../../pages/frontend/errors/404_de.html';
         }
-    }
-
-    /**
-     * Renders a template
-     *
-     * @param string $tpl The template filename
-     * @param array $vars The template variables
-     */
-    public function renderTpl($tpl, $vars = [])
-    {
-        // Init the content with optional variables
-        $profile = new Template(__DIR__ . '/../../../pages/frontend/' . $tpl);
-        $profile->set($vars);
-
-        // Get the layout
-        $layout = $this->renderLayout($this->routeConfig->config['layout']);
-
-        // Put layout and content together
-        if (!isset($this->routeConfig->config['title'])) {
-            $layout['vars']['title'] = $this->routeConfig->config['name'];
-        } else {
-            $layout['vars']['title'] = $this->routeConfig->config['title'];
-        }
-        $layout['vars']['content'] = $profile->output();
-        $layout['layout']->set($layout['vars']);
-
-        echo $layout['layout']->output();
-    }
-
-    /**
-     * Renders a layout for templates
-     *
-     * @param string $file The filename
-     * @return array
-     */
-    public function renderLayout($file)
-    {
-        // Init the layout for the content
-        $layoutVars = $this->config->$file;
-
-        if (isset($layoutVars['header'])) {
-            $header = new Template(__DIR__ . '/../../layout/' . $layoutVars['header']);
-            $layoutVars['header'] = $header->output();
-        }
-
-        $layout = new Template(__DIR__ . '/../../layout/' . $file);
-
-        // Define the layouts variables
-        foreach ($layoutVars as $key => $layoutVar) {
-            if (preg_match('/\w*(.css)/', $key)) {
-                $layoutVars[$key] = preg_replace('/\w*(.css)/', '/../../..' . $this->config->assetsPath .'/css/'. $layoutVar, $key);
-            }
-
-            if (preg_match('/\w*(.js)/', $key)) {
-                $layoutVars[$key] = preg_replace('/\w*(.js)/', '/../../..' . $this->config->assetsPath .'/js/'. $layoutVar, $key);
-            }
-        }
-
-        return [
-            'layout' => $layout,
-            'vars'   => $layoutVars,
-        ];
     }
 
     /**
