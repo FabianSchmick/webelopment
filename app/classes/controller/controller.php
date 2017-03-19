@@ -49,7 +49,7 @@ abstract class Controller
      *
      * @param string $tpl The template filename
      * @param array $vars The template variables
-     * @return boolean
+     * @return boolean True
      */
     public function renderTpl($tpl, $vars = [])
     {
@@ -78,7 +78,7 @@ abstract class Controller
      * Renders a layout for templates
      *
      * @param string $file The filename
-     * @return array
+     * @return array Layout and the needed layout vars
      */
     public function renderLayout($file)
     {

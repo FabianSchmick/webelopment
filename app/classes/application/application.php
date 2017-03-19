@@ -2,6 +2,8 @@
 
 namespace application;
 
+use model\PDODatabase;
+
 class Application
 {
     /**
@@ -15,7 +17,7 @@ class Application
     private $routeConfig = [];
 
     /**
-     * @var \database\PDODatabase $db PDO database object
+     * @var PDODatabase $db PDO database object
      */
     private $db;
 
@@ -114,7 +116,7 @@ class Application
             !empty($this->config->dbUser) &&
             isset($this->config->dbPassword)) {
 
-            $pdoDb = new \model\PDODatabase(
+            $pdoDb = new PDODatabase(
                 $this->config->dbType,
                 $this->config->dbHost,
                 $this->config->dbName,
