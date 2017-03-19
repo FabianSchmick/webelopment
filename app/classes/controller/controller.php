@@ -1,8 +1,10 @@
 <?php
 
-namespace application;
+namespace controller;
 
-use database\PDODatabase;
+use application\Config;
+use model\PDODatabase;
+use view\Template;
 
 abstract class Controller
 {
@@ -17,7 +19,7 @@ abstract class Controller
     protected $routeConfig = [];
 
     /**
-     * @var \database\PDODatabase $db PDO database object
+     * @var PDODatabase $db PDO database object
      */
     protected $db;
 

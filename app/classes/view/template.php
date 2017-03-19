@@ -1,6 +1,6 @@
 <?php
 
-namespace application;
+namespace view;
 
 /**
  * Simple template engine class (use [@tag] tags in your templates).

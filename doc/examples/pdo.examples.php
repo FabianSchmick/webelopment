@@ -1,6 +1,6 @@
 <?php
 
-use database\PDODatabase;
+use model\PDODatabase;
 
 /*
  * PDO examples

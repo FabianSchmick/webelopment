@@ -8,8 +8,6 @@
 
 namespace controller;
 
-use application\Controller;
-
 class StarWarsController extends Controller
 {
     /**

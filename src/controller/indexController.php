@@ -2,8 +2,6 @@
 
 namespace controller;
 
-use application\Controller;
-
 class IndexController extends Controller
 {
     /**

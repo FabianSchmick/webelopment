@@ -114,7 +114,7 @@ class Application
             !empty($this->config->dbUser) &&
             isset($this->config->dbPassword)) {
 
-            $pdoDb = new \database\PDODatabase(
+            $pdoDb = new \model\PDODatabase(
                 $this->config->dbType,
                 $this->config->dbHost,
                 $this->config->dbName,
