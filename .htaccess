@@ -8,8 +8,8 @@ RewriteRule ^(.*)$ /index.php?uri=$1 [QSA,L]
 # disable access to dotfiles
 RewriteRule ^\. - [F,L]
 
-# disable access to pages
-RewriteRule ^pages - [F,L]
+# disable access to src
+RewriteRule ^src - [F,L]
 
 # disable access to composer
 RewriteRule ^composer\.json - [F,L]

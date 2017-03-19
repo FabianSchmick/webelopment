@@ -52,7 +52,7 @@ abstract class Controller
     public function renderTpl($tpl, $vars = [])
     {
         // Init the content with optional variables
-        $profile = new Template(__DIR__ . '/../../../pages/frontend/' . $tpl);
+        $profile = new Template(__DIR__ . '/../../../src/views/' . $tpl);
         $profile->set($vars);
 
         // Get the layout

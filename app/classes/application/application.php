@@ -68,7 +68,7 @@ class Application
 
         if (!$findUrl) {
             header('HTTP/1.0 404 Not Found');
-            include_once __DIR__ . '/../../../pages/frontend/errors/404_de.html';
+            include_once __DIR__ . '/../../../src/views/errors/404_de.html';
         }
     }
 

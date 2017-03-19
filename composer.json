@@ -19,7 +19,7 @@
     "autoload": {
         "psr-4": {
             "": "app/classes",
-            "controller\\": "pages/controller"
+            "controller\\": "src/controller"
         }
     }
 }
