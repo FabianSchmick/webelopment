@@ -18,8 +18,8 @@ class StarWarsController extends Controller
     public function indexAction()
     {
         return $this->renderTpl('star_wars.tpl.php', [
-            'force' => $this->config->route['arguments']['force'],
-            'you' => $this->config->route['arguments']['you'],
+            'force' => $this->force,
+            'you' => $this->you,
         ]);
     }
 }

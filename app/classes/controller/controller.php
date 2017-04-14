@@ -19,6 +19,11 @@ abstract class Controller
     protected $db;
 
     /**
+     * @var array $arguments Arguments of the route
+     */
+    protected $arguments = [];
+
+    /**
      * The indexAction (like main method)
      *
      * @return mixed
@@ -30,11 +35,39 @@ abstract class Controller
      * Controller constructor.
      * @param Config $config The app config
      * @param PDODatabase|String $db The db object|The not used string
+     * @param array $arguments Arguments of the route
      */
-    public function __construct(Config $config, $db)
+    public function __construct(Config $config, $db, $arguments = [])
     {
         $this->config = $config;
         $this->db = $db;
+        $this->arguments = $arguments;
+    }
+
+    /**
+     * Magic Setter for the arguments
+     *
+     * @param mixed $key The key to set
+     * @param mixed $value The value to set
+     */
+    public function __set($key, $value)
+    {
+        $this->arguments[$key] = $value;
+    }
+
+    /**
+     * Magic Getter for the arguments
+     *
+     * @param mixed $key The key to get
+     * @return mixed
+     */
+    public function __get($key)
+    {
+        if(isset($this->arguments[$key])) {
+            return $this->arguments[$key];
+        } else {
+            return null;
+        }
     }
 
     /**

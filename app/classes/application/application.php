@@ -54,11 +54,12 @@ class Application
             $route->add($uri, $routeConf, $matches[1], function($params) {
                 $this->config->route = $params['config'];
 
+                $args = [];
                 if (isset($params['arguments'])) {
-                    $this->config->route = array_merge($this->config->route, ['arguments' => $params['arguments']]);
+                    $args = $params['arguments'];
                 }
 
-                $controller = new $params['config']['controller']($this->config, $this->db);
+                $controller = new $params['config']['controller']($this->config, $this->db, $args);
 
                 $controller->indexAction();
             });
