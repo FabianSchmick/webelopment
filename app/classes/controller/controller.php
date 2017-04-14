@@ -58,7 +58,13 @@ abstract class Controller
         $profile->set($vars);
 
         // Get the layout
-        $layout = $this->renderLayout($this->routeConfig->config['layout']);
+        if (isset($this->routeConfig->config['layout'])) {
+            $useLayout = $this->routeConfig->config['layout'];
+        } else {
+            $useLayout = $this->config->defaultLayout;
+        }
+
+        $layout = $this->renderLayout($useLayout);
 
         // Put layout and content together
         if (!isset($this->routeConfig->config['title'])) {

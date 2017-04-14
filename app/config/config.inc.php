@@ -8,6 +8,9 @@ return [
     // Path for the assets
     "assetsPath" => "/assets",
 
+    // Default layout
+    'defaultLayout'  => 'layout.tpl',
+
     // Layout values
     "layout.tpl" => [
 

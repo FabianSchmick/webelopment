@@ -12,7 +12,6 @@ return [
         'name'          => 'Home',
         'uri'           => '/',
         'controller'    => \controller\IndexController::class,
-        'layout'        => 'layout.tpl',
     ],
 
     // Complex route with parameters
@@ -21,7 +20,7 @@ return [
         // Use the params in controller with: $this->routeConfig->arguments['force'] or $this->routeConfig->arguments['you']
         'uri'           => '/may/the/$force/be/with/$you',
         'controller'    => \controller\StarWarsController::class,
-        'layout'        => 'layout.tpl',
+        'layout'        => 'layoutStarWars.tpl',
     ],
 
 ];

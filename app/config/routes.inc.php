@@ -7,7 +7,6 @@ return [
         'name'          => 'Home',
         'uri'           => '/',
         'controller'    => \controller\IndexController::class,
-        'layout'        => 'layout.tpl',
     ],
 
 ];
