@@ -110,18 +110,18 @@ class Application
      */
     public function initDbConnection()
     {
-        if (!empty($this->config->dbType) &&
-            !empty($this->config->dbHost) &&
-            !empty($this->config->dbName) &&
-            !empty($this->config->dbUser) &&
-            isset($this->config->dbPassword)) {
+        if (!empty($this->config->database['dbType']) &&
+            !empty($this->config->database['dbHost']) &&
+            !empty($this->config->database['dbName']) &&
+            !empty($this->config->database['dbUser']) &&
+            isset($this->config->database['dbPassword'])) {
 
             $pdoDb = new PDODatabase(
-                $this->config->dbType,
-                $this->config->dbHost,
-                $this->config->dbName,
-                $this->config->dbUser,
-                $this->config->dbPassword
+                $this->config->database['dbType'],
+                $this->config->database['dbHost'],
+                $this->config->database['dbName'],
+                $this->config->database['dbUser'],
+                $this->config->database['dbPasswor']
             );
 
             $pdoDb->initializePDOObject();

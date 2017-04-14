@@ -20,10 +20,14 @@ return [
     ],
 
     // Database config
-    "dbType"     => "mysql",
-    "dbHost"     => "localhost",
-    "dbName"     => "application",
-    "dbUser"     => "root",
-    "dbPassword" => "",
+    "database"  => [
+
+        "dbType"     => "mysql",
+        "dbHost"     => "localhost",
+        "dbName"     => "application",
+        "dbUser"     => "root",
+        "dbPassword" => "",
+
+    ],
 
 ];
