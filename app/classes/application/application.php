@@ -12,11 +12,6 @@ class Application
     private $config = [];
 
     /**
-     * @var array $routeConfig Config of the current route
-     */
-    private $routeConfig = [];
-
-    /**
      * @var PDODatabase $db PDO database object
      */
     private $db;
@@ -28,7 +23,6 @@ class Application
     {
         $this->config = new Config();
         $this->config->loadFromFile('config.inc.php');
-        $this->routeConfig = new Config();
         $this->db = $this->initDbConnection();
     }
 
@@ -58,15 +52,13 @@ class Application
             }
 
             $route->add($uri, $routeConf, $matches[1], function($params) {
-                $this->routeConfig->initFromArr($params);
-
-                $this->config->route = $this->routeConfig->config;
+                $this->config->route = $params['config'];
 
                 if (isset($params['arguments'])) {
-                    $this->config->route = array_merge($this->config->route, ['arguments' => $this->routeConfig->arguments]);
+                    $this->config->route = array_merge($this->config->route, ['arguments' => $params['arguments']]);
                 }
 
-                $controller = new $this->routeConfig->config['controller']($this->config, $this->db);
+                $controller = new $params['config']['controller']($this->config, $this->db);
 
                 $controller->indexAction();
             });
