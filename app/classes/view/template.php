@@ -53,6 +53,17 @@ class Template
         require $this->file;
         $output = ob_get_clean();
 
+        // Include files in templates: [& path="path/to/file.tpl" ]
+        if (preg_match_all('/\[&\s*path\s*=\s*\"?\\\'?(.*?.tpl)\"?\\\'?\s*\]/', $output, $matches)) {
+            foreach ($matches[1] as $file) {
+                $include[] = file_get_contents(__DIR__ . '/../../layout/' . $file);
+            }
+
+            foreach ($matches[0] as $key => $match) {
+                $output = str_replace($match, $include[$key], $output);
+            }
+        }
+
         foreach ($this->values as $key => $value) {
             $tagToReplace = "[@$key]";
             $output = str_replace($tagToReplace, $value, $output);

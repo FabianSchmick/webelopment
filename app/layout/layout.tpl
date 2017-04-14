@@ -18,7 +18,7 @@
 </head>
 <body>
 	<div id="header">
-		[@header]
+		[& path="header.tpl" ]
 	</div>
 	<div class="container">
 		<div id="main" class="">

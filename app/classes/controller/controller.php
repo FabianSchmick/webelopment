@@ -117,11 +117,6 @@ abstract class Controller
         // Init the layout for the content
         $layoutVars = $this->config->$file;
 
-        if (isset($layoutVars['header'])) {
-            $header = new Template(__DIR__ . '/../../layout/' . $layoutVars['header']);
-            $layoutVars['header'] = $header->output();
-        }
-
         $layout = new Template(__DIR__ . '/../../layout/' . $file);
 
         // Define the layouts variables

@@ -18,7 +18,6 @@ return [
         "custom.css" => "custom.css",
         "main.js"    => "main.js",
         "favicon"    => "favicon.ico",
-        "header"     => "header.tpl",
 
     ],
 
