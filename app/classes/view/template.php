@@ -2,9 +2,6 @@
 
 namespace view;
 
-/**
- * Simple template engine class (use [@tag] tags in your templates).
- */
 class Template
 {
     /**
@@ -64,9 +61,9 @@ class Template
             }
         }
 
+        // For simple display of a variable: [$var]
         foreach ($this->values as $key => $value) {
-            $tagToReplace = "[@$key]";
-            $output = str_replace($tagToReplace, $value, $output);
+            $output = preg_replace('/\[\$\s*('. $key .')\s*\]/', $value, $output);
         }
 
         return $output;
