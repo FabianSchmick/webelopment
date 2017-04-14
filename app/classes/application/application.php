@@ -60,7 +60,13 @@ class Application
             $route->add($uri, $routeConf, $matches[1], function($params) {
                 $this->routeConfig->initFromArr($params);
 
-                $controller = new $this->routeConfig->config['controller']($this->config, $this->routeConfig, $this->db);
+                $this->config->route = $this->routeConfig->config;
+
+                if (isset($params['arguments'])) {
+                    $this->config->route = array_merge($this->config->route, ['arguments' => $this->routeConfig->arguments]);
+                }
+
+                $controller = new $this->routeConfig->config['controller']($this->config, $this->db);
 
                 $controller->indexAction();
             });

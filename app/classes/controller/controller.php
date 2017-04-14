@@ -14,11 +14,6 @@ abstract class Controller
     protected $config = [];
 
     /**
-     * @var array $routeConfig Config of the current route
-     */
-    protected $routeConfig = [];
-
-    /**
      * @var PDODatabase $db PDO database object
      */
     protected $db;
@@ -34,13 +29,11 @@ abstract class Controller
     /**
      * Controller constructor.
      * @param Config $config The app config
-     * @param Config $routeConfig The specific route config
      * @param PDODatabase|String $db The db object|The not used string
      */
-    public function __construct(Config $config, Config $routeConfig, $db)
+    public function __construct(Config $config, $db)
     {
         $this->config = $config;
-        $this->routeConfig = $routeConfig;
         $this->db = $db;
     }
 
@@ -58,8 +51,8 @@ abstract class Controller
         $profile->set($vars);
 
         // Get the layout
-        if (isset($this->routeConfig->config['layout'])) {
-            $useLayout = $this->routeConfig->config['layout'];
+        if (isset($this->config->route['layout'])) {
+            $useLayout = $this->config->route['layout'];
         } else {
             $useLayout = $this->config->defaultLayout;
         }
@@ -67,10 +60,10 @@ abstract class Controller
         $layout = $this->renderLayout($useLayout);
 
         // Put layout and content together
-        if (!isset($this->routeConfig->config['title'])) {
-            $layout['vars']['title'] = $this->routeConfig->config['name'];
+        if (!isset($this->config->route['title'])) {
+            $layout['vars']['title'] = $this->config->route['name'];
         } else {
-            $layout['vars']['title'] = $this->routeConfig->config['title'];
+            $layout['vars']['title'] = $this->config->route['title'];
         }
         $layout['vars']['content'] = $profile->output();
         $layout['layout']->set($layout['vars']);

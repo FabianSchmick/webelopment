@@ -17,7 +17,7 @@ return [
     // Complex route with parameters
     'star_wars'      => [
         'name'          => 'Star Wars',
-        // Use the params in controller with: $this->routeConfig->arguments['force'] or $this->routeConfig->arguments['you']
+        // Use the params in controller with: $this->config->route['arguments']['force'] or $this->config->route['arguments']['you']
         'uri'           => '/may/the/$force/be/with/$you',
         'controller'    => \controller\StarWarsController::class,
         'layout'        => 'layoutStarWars.tpl',
