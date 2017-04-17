@@ -43,7 +43,7 @@ class Route
         $this->_listUri[] = $uri;
         $this->_listCall[] = $function;
         $this->_config[] = $config;
-        $this->_argsName = $argsName;
+        $this->_argsName[] = $argsName;
     }
 
     /**
@@ -83,7 +83,7 @@ class Route
                 {
                     if ($value == '.*')
                     {
-                        $replacementValues['arguments'][$this->_argsName[$i]] = $realUri[$key];
+                        $replacementValues['arguments'][$this->_argsName[$listKey][$i]] = $realUri[$key];
                         $i += 1;
                     }
                 }
