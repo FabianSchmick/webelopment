@@ -135,4 +135,87 @@ abstract class Controller
             'vars'   => $layoutVars,
         ];
     }
+
+    /**
+     * Gets the breadcrumbs of the current route
+     *
+     * @return array $breadcrumbs
+     */
+    public function getBreadcrumbs()
+    {
+        $routes = include __DIR__ . '/../../config/routes.inc.php';
+
+        // Get the subroutes from current route
+        preg_match_all('/\/.*?(?=\/)|\/.*/', $this->config->route['uri'], $currentRouteGroups);
+
+        foreach ($currentRouteGroups[0] as $i => $currentRouteGroup) {
+            $uriNeedle = implode("", $currentRouteGroups[0]);
+            $uriNeedle = str_replace('$', '\$', $uriNeedle);
+            $uriNeedles[] = str_replace('/', '\/', $uriNeedle);
+            array_pop($currentRouteGroups[0]);
+        }
+
+        // Compare the route pieces with the routes from the config file to get the breadcrumbs
+        foreach ($uriNeedles as $i => $currentRouteGroup) {
+            $breadcrumbs[] = $this->compareUris($currentRouteGroup, $routes);
+        }
+
+        // If route '/' exists, then add it to the breadcrumbs
+        foreach ($routes as $route) {
+            if (preg_match_all('/^\/$/', $route['uri'], $indexRoute) && $route != $this->config->route) {
+                $route['url'] = $this->getUrl($route['uri']);
+                array_push($breadcrumbs, $route);
+            }
+        }
+
+        // From first route to the current - remove not founded routes - reindex array
+        $breadcrumbs = array_values(array_filter(array_reverse($breadcrumbs)));
+
+        return $breadcrumbs;
+    }
+
+    /**
+     * Compares URIs and returns their match
+     *
+     * @param string $currentUri The current uri to compare
+     * @param array $compareUris The array to compare with the current
+     * @return array $equalUri The match
+     */
+    private function compareUris($currentUri, array $compareUris)
+    {
+        $match = [];
+
+        foreach ($compareUris as $compareUri) {
+            if (preg_match_all('/' . $currentUri . '(?!.)/', $compareUri['uri'], $matches)) {
+
+                $match = $compareUri;
+
+                // Replace the uri variables with their correct values
+                if ($match['uri'] == $this->config->route['uri']) {
+                    preg_match_all('/\$(.*?(?=\\\)|.*?$)/', $currentUri, $vars);
+
+                    foreach ($vars[1] as $var) {
+                        $match['uri'] = str_replace('$' . $var, $this->{$var}, $match['uri']);
+                    }
+                }
+
+                $match['url'] = $this->getUrl($match['uri']);
+            }
+        }
+
+        return $match;
+    }
+
+    /**
+     * Generates an URL for an URI
+     *
+     * @param string $uri An URI to generate an URL for
+     * @return string The generated URL
+     */
+    public function getUrl($uri)
+    {
+        $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']!=='off') || $_SERVER['SERVER_PORT']==443) ? 'https://':'http://';
+
+        return $protocol.$_SERVER['SERVER_NAME'].$uri;
+    }
 }
