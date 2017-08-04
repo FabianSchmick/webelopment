@@ -65,19 +65,20 @@ class Route
         foreach ($this->_listUri as $listKey => $listUri)
         {
             $i = 0;
+            $listUriPattern = $listUri;
 
             /**
              * Fix matches for uris with params
              */
             $pattern = '/(?:\.\*|\.\*\/)$/';
             if (preg_match($pattern, $listUri, $matches)) {
-                $listUri = preg_replace($pattern, '\S[^/]*(|\/)', $listUri);
+                $listUriPattern = preg_replace($pattern, '\S[^/]*(|\/)', $listUri);
             }
 
             /**
              * See if there is a match
              */
-            if (preg_match("#^$listUri$#", $uri))
+            if (preg_match("#^$listUriPattern$#", $uri))
             {
                 /**
                  * Replace the values
