@@ -58,13 +58,22 @@ class Route
 
         $replacementValues = array();
         $findUrl = false;
-        $i = 0;
 
         /**
          * List through the stored URI's
          */
         foreach ($this->_listUri as $listKey => $listUri)
         {
+            $i = 0;
+
+            /**
+             * Fix matches for uris with params
+             */
+            $pattern = '/(?:\.\*|\.\*\/)$/';
+            if (preg_match($pattern, $listUri, $matches)) {
+                $listUri = preg_replace($pattern, '\S[^/]*(|\/)', $listUri);
+            }
+
             /**
              * See if there is a match
              */
