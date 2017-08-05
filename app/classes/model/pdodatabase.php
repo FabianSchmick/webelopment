@@ -74,7 +74,7 @@ class PDODatabase
 	 *
 	 * @param string $sql SQL statement
 	 * @param array $bindings Bindings for the SQL statement
-     * @param mixed $fetch_style Controls the contents of the returned array
+	 * @param mixed $fetch_style Controls the contents of the returned array
 	 * @return array|bool Query result
 	 */
 	public function query($sql, $bindings = [], $fetch_style = PDO::FETCH_ASSOC)
@@ -106,7 +106,7 @@ class PDODatabase
 	 * Find All from one table
 	 *
 	 * @param string $table The table to query
-     * @param mixed $fetch_style Controls the contents of the returned array
+	 * @param mixed $fetch_style Controls the contents of the returned array
 	 * @return \PDOStatement Query result
 	 */
 	public function findAll($table, $fetch_style = PDO::FETCH_ASSOC)
