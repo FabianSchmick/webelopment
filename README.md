@@ -2,6 +2,18 @@
 
 Simple Framework for Web development.
 
+## Features
+- MVC concept
+  - Model class which provides PDO connection and useful methods
+  - Views with an simple template engine
+  - Controller for your logical code
+- Route system
+  - Define simple or complex routes with or without parameters
+- Breadcrumbs generator
+- Config files
+- CSS Grid system and helper classes
+- Documentation with code examples
+
 ## Installation
 
 What you need:
