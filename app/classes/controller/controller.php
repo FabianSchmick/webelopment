@@ -191,12 +191,10 @@ abstract class Controller
                 $match = $compareUri;
 
                 // Replace the uri variables with their correct values
-                if ($match['uri'] == $this->config->route['uri']) {
-                    preg_match_all('/\$(.*?(?=\\\)|.*?$)/', $currentUri, $vars);
+                preg_match_all('/\$(.*?(?=\\\)|.*?$)/', $currentUri, $vars);
 
-                    foreach ($vars[1] as $var) {
-                        $match['uri'] = str_replace('$' . $var, $this->{$var}, $match['uri']);
-                    }
+                foreach ($vars[1] as $var) {
+                    $match['uri'] = str_replace('$' . $var, $this->{$var}, $match['uri']);
                 }
 
                 $match['url'] = $this->getUrl($match['uri']);
