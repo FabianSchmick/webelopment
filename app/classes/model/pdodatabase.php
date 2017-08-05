@@ -59,8 +59,6 @@ class PDODatabase
 
 	/**
 	 * Initialize PDO Object
-	 *
-	 * @return PDO $connection The db connection
 	 */
 	public function initializePDOObject()
 	{
@@ -76,14 +74,15 @@ class PDODatabase
 	 *
 	 * @param string $sql SQL statement
 	 * @param array $bindings Bindings for the SQL statement
+     * @param mixed $fetch_style Controls the contents of the returned array
 	 * @return array|bool Query result
 	 */
-	public function query($sql, $bindings = [])
+	public function query($sql, $bindings = [], $fetch_style = PDO::FETCH_ASSOC)
 	{
 		$stmt = $this->connection->prepare($sql);
 		$stmt->execute($bindings);
 
-		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$results = $stmt->fetchAll($fetch_style);
 
 		return $results ? $results : false;
 	}
@@ -95,7 +94,7 @@ class PDODatabase
 	 * @param array $bindings Bindings for the SQL statement
 	 * @return int Number of last affected rows
 	 */
-	public function cud($sql, $bindings)
+	public function cud($sql, array $bindings)
 	{
 		$stmt = $this->connection->prepare($sql);
 		$stmt->execute($bindings);
@@ -107,12 +106,13 @@ class PDODatabase
 	 * Find All from one table
 	 *
 	 * @param string $table The table to query
+     * @param mixed $fetch_style Controls the contents of the returned array
 	 * @return \PDOStatement Query result
 	 */
-	public function findAll($table)
+	public function findAll($table, $fetch_style = PDO::FETCH_ASSOC)
 	{
 		try{
-			$results = $this->connection->query('SELECT * FROM ' . $table)->fetchAll(PDO::FETCH_ASSOC);
+			$results = $this->connection->query('SELECT * FROM ' . $table)->fetchAll($fetch_style);
 		} catch(PDOException $e) {
 			echo 'ERROR: '.$e->getMessage();
 		}
