@@ -144,20 +144,21 @@ abstract class Controller
     public function getBreadcrumbs()
     {
         $routes = include __DIR__ . '/../../config/routes.inc.php';
+        $breadcrumbs = array();
 
         // Get the subroutes from current route
-        preg_match_all('/\/.*?(?=\/)|\/.*/', $this->config->route['uri'], $currentRouteGroups);
+        if (preg_match_all('/\/.*?(?=\/)|\/.*./', $this->config->route['uri'], $currentRouteGroups)) {
+            foreach ($currentRouteGroups[0] as $i => $currentRouteGroup) {
+                $uriNeedle = implode("", $currentRouteGroups[0]);
+                $uriNeedle = str_replace('$', '\$', $uriNeedle);
+                $uriNeedles[] = str_replace('/', '\/', $uriNeedle);
+                array_pop($currentRouteGroups[0]);
+            }
 
-        foreach ($currentRouteGroups[0] as $i => $currentRouteGroup) {
-            $uriNeedle = implode("", $currentRouteGroups[0]);
-            $uriNeedle = str_replace('$', '\$', $uriNeedle);
-            $uriNeedles[] = str_replace('/', '\/', $uriNeedle);
-            array_pop($currentRouteGroups[0]);
-        }
-
-        // Compare the route pieces with the routes from the config file to get the breadcrumbs
-        foreach ($uriNeedles as $i => $currentRouteGroup) {
-            $breadcrumbs[] = $this->compareUris($currentRouteGroup, $routes);
+            // Compare the route pieces with the routes from the config file to get the breadcrumbs
+            foreach ($uriNeedles as $i => $currentRouteGroup) {
+                $breadcrumbs[] = $this->compareUris($currentRouteGroup, $routes);
+            }
         }
 
         // If route '/' exists, then add it to the breadcrumbs
@@ -186,7 +187,7 @@ abstract class Controller
         $match = [];
 
         foreach ($compareUris as $compareUri) {
-            if (preg_match_all('/' . $currentUri . '(?!.)/', $compareUri['uri'], $matches)) {
+            if (preg_match_all('/' . $currentUri . '[\/]?(?!.)/', $compareUri['uri'], $matches)) {
 
                 $match = $compareUri;
 
