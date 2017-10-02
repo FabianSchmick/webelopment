@@ -53,7 +53,9 @@ class Template
         // Include files in templates: [& path="path/to/file.tpl" ]
         if (preg_match_all('/\[&\s*path\s*=\s*\"?\\\'?(.*?.tpl)\"?\\\'?\s*\]/', $output, $matches)) {
             foreach ($matches[1] as $file) {
-                $include[] = file_get_contents(__DIR__ . '/../../layout/' . $file);
+                ob_start();
+                require __DIR__ . '/../../layout/' . $file;
+                $include[] = ob_get_clean();
             }
 
             foreach ($matches[0] as $key => $match) {
