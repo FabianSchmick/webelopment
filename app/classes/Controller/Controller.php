@@ -3,7 +3,7 @@
 namespace Controller;
 
 use Application\Config;
-use Model\PDODatabase;
+use Model\Database;
 use View\Template;
 
 abstract class Controller
@@ -14,7 +14,7 @@ abstract class Controller
     protected $config = [];
 
     /**
-     * @var PDODatabase $db PDO database object
+     * @var Database $db PDO database object
      */
     protected $db;
 
@@ -34,7 +34,7 @@ abstract class Controller
     /**
      * Controller constructor.
      * @param Config $config The app config
-     * @param PDODatabase|String $db The db object|The not used string
+     * @param Database|String $db The db object|The not used string
      * @param array $arguments Arguments of the route
      */
     public function __construct(Config $config, $db, $arguments = [])

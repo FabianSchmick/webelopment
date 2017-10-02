@@ -5,7 +5,7 @@ namespace Model;
 use PDO;
 use PDOException;
 
-class PDODatabase
+class Database
 {
 	/**
 	 * @var string $dbType Database Type (e.g. mysql)
@@ -39,7 +39,7 @@ class PDODatabase
 
 
 	/**
-	 * PDODatabase constructor.
+	 * Database constructor.
 	 *
 	 * @param string $dbType Database Type
 	 * @param string $dbHost Database Host
@@ -54,6 +54,7 @@ class PDODatabase
 		$this->dbName = $dbName;
 		$this->dbUser = $dbUser;
 		$this->dbPassword = $dbPassword;
+		$this->initializePDOObject();
 	}
 
 
@@ -63,7 +64,9 @@ class PDODatabase
 	public function initializePDOObject()
 	{
 		try{
-			$this->connection = new PDO($this->dbType.':host='.$this->dbHost.';dbname='.$this->dbName, $this->dbUser, $this->dbPassword);
+			$this->connection = new PDO($this->dbType.':host='.$this->dbHost.';dbname='.$this->dbName, $this->dbUser, $this->dbPassword, array(
+			    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'")
+            );
 		} catch(PDOException $e) {
 			echo 'ERROR: '.$e->getMessage();
 		}

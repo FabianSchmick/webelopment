@@ -2,7 +2,7 @@
 
 namespace Application;
 
-use Model\PDODatabase;
+use Model\Database;
 
 class Application
 {
@@ -12,7 +12,7 @@ class Application
     private $config = [];
 
     /**
-     * @var PDODatabase $db PDO database object
+     * @var Database $db PDO database object
      */
     private $db;
 
@@ -115,15 +115,13 @@ class Application
             !empty($this->config->database['dbUser']) &&
             isset($this->config->database['dbPassword'])) {
 
-            $pdoDb = new PDODatabase(
+            $pdoDb = new Database(
                 $this->config->database['dbType'],
                 $this->config->database['dbHost'],
                 $this->config->database['dbName'],
                 $this->config->database['dbUser'],
                 $this->config->database['dbPasswor']
             );
-
-            $pdoDb->initializePDOObject();
         } else {
             $pdoDb = "Error - no database connection configured.";
         }

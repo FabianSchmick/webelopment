@@ -1,6 +1,6 @@
 <?php
 
-use model\PDODatabase;
+use Model\Database;
 
 /*
  * PDO examples
@@ -8,12 +8,12 @@ use model\PDODatabase;
 
 
 /* ---------------------------------------------------------------- */
-/*                Call query method from PDODatabase                */
+/*                Call query method from Database                */
 /* ---------------------------------------------------------------- */
 
 
 
-$pdoDb = new PDODatabase("type", "host", "name", "user", "password");
+$pdoDb = new Database("type", "host", "name", "user", "password");
 
 $connection = $pdoDb->initializePDOObject();
 
@@ -29,7 +29,7 @@ $result = $pdoDb->query($connection, 'SELECT * FROM users WHERE id = :id', array
 $id = 1;    // Should be some dynamic variable
 
 try{
-    $pdoDb = new PDODatabase("type", "host", "name", "user", "password");
+    $pdoDb = new Database("type", "host", "name", "user", "password");
 
     $connection = $pdoDb->initializePDOObject();
 
@@ -55,7 +55,7 @@ try{
 /* ---------------------------------------------------------------- */
 
 try{
-    $pdoDb = new PDODatabase("type", "host", "name", "user", "password");
+    $pdoDb = new Database("type", "host", "name", "user", "password");
 
     $connection = $pdoDb->initializePDOObject();
 
