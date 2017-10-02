@@ -122,4 +122,22 @@ class Database
 
 		return $results;
 	}
+
+    /**
+     * Query only one from PDO db
+     *
+     * @param string $sql SQL statement
+     * @param array $bindings Bindings for the SQL statement
+     * @param mixed $fetch_style Controls the contents of the returned array
+     * @return array|bool Query result
+     */
+	public function fetchOne($sql, $bindings = [], $fetch_style = PDO::FETCH_ASSOC)
+    {
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute($bindings);
+
+        $results = $stmt->fetch($fetch_style);
+
+        return $results ? $results : false;
+    }
 }
