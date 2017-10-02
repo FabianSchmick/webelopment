@@ -1,10 +1,10 @@
 <?php
 
-namespace controller;
+namespace Controller;
 
-use application\Config;
-use model\PDODatabase;
-use view\Template;
+use Application\Config;
+use Model\PDODatabase;
+use View\Template;
 
 abstract class Controller
 {
@@ -80,7 +80,7 @@ abstract class Controller
     public function renderTpl($tpl, $vars = [])
     {
         // Init the content with optional variables
-        $profile = new Template(__DIR__ . '/../../../src/views/' . $tpl);
+        $profile = new Template(__DIR__ . '/../../../src/Views/' . $tpl);
         $profile->set($vars);
 
         // Get the layout

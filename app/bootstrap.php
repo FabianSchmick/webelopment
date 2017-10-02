@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use application\Application;
+use Application\Application;
 
 
 $app = new Application();

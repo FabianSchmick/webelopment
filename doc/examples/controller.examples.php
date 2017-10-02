@@ -3,10 +3,10 @@
 /* ---------------------------------------------------------------- */
 /*                		  Controller Example	                    */
 /* ---------------------------------------------------------------- */
-/* In src/controller/starWarsController.php */
+/* In src/Controller/StarWarsController.php */
 
 
-namespace controller;
+namespace Controller;
 
 class StarWarsController extends Controller
 {

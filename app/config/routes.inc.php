@@ -6,7 +6,7 @@ return [
     'home'      => [
         'name'          => 'Home',
         'uri'           => '/',
-        'controller'    => \controller\IndexController::class,
+        'controller'    => \Controller\IndexController::class,
     ],
 
 ];

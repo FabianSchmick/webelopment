@@ -4,9 +4,9 @@ This section explains how to develop controllers:
 
 
 * For an example look in */examples/controller.examples.php*
-    * As file name use something like: `starWarsController.php`
+    * As file name use something like: `StarWarsController.php`
         * For more order you can use subdirectories, too.
-          Something like `movies/scifi/starWarsController.php`
+          Something like `movies/scifi/StarWarsController.php`
           But don't forget to update the namespace in the controller itself and the `'controller'` in *app/config/routes.inc.php*
     * The controller extends the class Controller: `class StarWarsController extends Controller`
     * `indexAction()` is like a main method, this handles the complete page rendering

@@ -1,6 +1,6 @@
 <?php
 
-namespace controller;
+namespace Controller;
 
 class IndexController extends Controller
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace application;
+namespace Application;
 
-use model\PDODatabase;
+use Model\PDODatabase;
 
 class Application
 {
@@ -69,7 +69,7 @@ class Application
 
         if (!$findUrl) {
             header('HTTP/1.0 404 Not Found');
-            include_once __DIR__ . '/../../../src/views/errors/404_de.html';
+            include_once __DIR__ . '/../../../src/Views/errors/404_de.html';
         }
     }
 
